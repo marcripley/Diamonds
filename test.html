@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>test</title>
+<script type="text/javascript">
+window.onload = function() {
+	var x = 16;
+	var y = 16;
+	var radius = 16;
+	
+	// Creates an octogon that aproximate the circle for backward compatibility.
+	var points = [];
+	var theta;
+	
+	for(var i = 0; i < 8; i++) {
+		theta = i * Math.PI / 4;
+		points[i] = [Math.sin(theta) * radius, Math.cos(theta) * radius];
+		//points[i] = [Math.round((Math.sin(theta) * radius)*1000)/1000, Math.round((Math.cos(theta) * radius)*1000)/1000];
+	}
+
+	for(var p=0;p<points.length;p++) {
+		document.getElementById("here").innerHTML += points[p] + "<br>";
+	}
+}
+</script>
+</head>
+<body>
+<div id="here"></div>
+</body>
+</html>

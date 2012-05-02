@@ -1,0 +1,332 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"get",
+				"getPoints"
+			],
+			[
+				"add",
+				"addComponent"
+			],
+			[
+				"on",
+				"OnlyTwoway"
+			],
+			[
+				"remove",
+				"removeComponent"
+			],
+			[
+				"only",
+				"onlytwoway"
+			],
+			[
+				"G",
+				"Green"
+			],
+			[
+				"dia",
+				"diamond"
+			],
+			[
+				"tile",
+				"tileParams"
+			],
+			[
+				"level",
+				"level_lines"
+			],
+			[
+				"di",
+				"diamond"
+			],
+			[
+				"C",
+				"Color"
+			],
+			[
+				"play",
+				"playerBlue"
+			],
+			[
+				"brick",
+				"brickBlue"
+			],
+			[
+				"br",
+				"brickGreen"
+			],
+			[
+				"mak",
+				"make_hash_table"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "crafty.js",
+			"settings":
+			{
+				"buffer_size": 143337,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "game.js",
+			"settings":
+			{
+				"buffer_size": 7866,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "levels.xml",
+			"settings":
+			{
+				"buffer_size": 429,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/xampp/htdocs/diamonds/index.html",
+		"/C/xampp/htdocs/diamonds/test.html",
+		"/C/xampp/htdocs/diamonds/coll_bug.html",
+		"/C/xampp/htdocs/diamonds/game-orig-bug.js",
+		"/C/xampp/htdocs/diamonds/levels.xml",
+		"/C/xampp/htdocs/diamonds/levels/1.xml",
+		"/C/xampp/htdocs/diamonds/levels/levels.xml",
+		"/C/xampp/htdocs/diamonds/levels/xxxxxxxxxx.xml",
+		"/C/xampp/htdocs/diamonds/crafty-min.js",
+		"/C/xampp/htdocs/marcsearch/crawl.py",
+		"/C/Users/Marc/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Marc/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/Marc/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"circle",
+			"\"></",
+			"background",
+			"crafty.poly",
+			"poly",
+			"normal",
+			"onhit",
+			"hit",
+			"fn",
+			"onhit",
+			"speed",
+			"RemoveComponent",
+			"removeComponent",
+			"remove",
+			"childNodes[0].",
+			"hit",
+			"],",
+			"\n			if (level_lines[i]=='g') {\n				Crafty.e(\"2D, DOM, brick, Color, Collision\")\n					.attr({ x: i * 64, y: 0 * 32, z:1 })\n					.setcolor('brick','Green') // Colors specified must be capitalized\n					.collision()\n					.onHit(\"playerGreen\", function() {\n						this.destroy();\n					});\n			}",
+			"\n				.onHit(\"brick\", function() {\n					naturalDir = -naturalDir; // When a collision occurs with a brick, reverse player's vertical direction\n				})",
+			".onHit(\"brick\", function() {\n					naturalDir = -naturalDir; // When a collision occurs with a brick, reverse player's vertical direction\n				});",
+			"onhit",
+			"for (var j = 0; j < 2; j++) {\n\n					//place diamonds on tiles\n					Crafty.e(\"2D, DOM, brick, green, Collision\")\n						.attr({ x: i * 64, y: j * 32, z:1 })\n						.collision()\n						.onHit(\"playergreen\", function() {\n							this.destroy();\n						});\n				}"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "crafty.js",
+					"settings":
+					{
+						"buffer_size": 143337,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								52020,
+								52093
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 33744.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "game.js",
+					"settings":
+					{
+						"buffer_size": 7866,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6486,
+								6486
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3465.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "levels.xml",
+					"settings":
+					{
+						"buffer_size": 429,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								243,
+								243
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XML/XML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 45.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 131.0,
+	"status_bar_visible": true
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<level>
+	<number>1</number>
+	<layout>
+ggbbrrrrbbgg
+bbbbr  rbbbb
+ggppp  pppgg
+rrrrrrrrrrrr
+BGPR    RPGB
+	</layout>
+</level>
+<level>
+	<number>2</number>
+	<layout>
+x    rr    x
+-   -gg-   -
+   *gggg*   
+ R*bbbbbb*B 
+ -ll    ll- 
+     **     
+     **     
+ -ll    ll- 
+ G*gggggg*P 
+   *bbbb*   
+    -bb-    
+     pp     
+	</layout>
+</level>
