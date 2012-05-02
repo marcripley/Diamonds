@@ -1,27 +1,27 @@
 window.onload = function () {
 
-		var MAX_WIDTH = 768;
-		var MAX_HEIGHT = 384;
-    //start crafty
-		// Map is 10 (64px) tiles horizontally and 16 (32px) tiles vertically
+	// Game window dimensions
+	// Map is 12 (64px) tiles horizontally and 12 (32px) tiles vertically
+	var MAX_WIDTH = 768;
+	var MAX_HEIGHT = 384;
+    // Start crafty
     Crafty.init(MAX_WIDTH, MAX_HEIGHT);
-    //Crafty.canvas();
 
-    //turn the sprite map into usable components
+    // Turn the sprite map into usable components
     Crafty.sprite(32, "sprite.png", {
     	// Colors specified must be capitalized
-    	brickDeath: [0, 0, 2, 1],
-        diamondGray: [0, 1, 2, 1],
-        brickBlue: [0, 2, 2, 1],
-		brickGreen: [0, 3, 2, 1],
-		brickPurple: [0, 4, 2, 1],
-		brickRed: [0, 5, 2, 1],
-		brickDiamond: [2, 0, 2, 1],
-		brickLightblue: [2, 1, 2, 1],
-		diamondBlue: [2, 2, 2, 1],
-		diamondGreen: [2, 3, 2, 1],
-		diamondPurple: [2, 4, 2, 1],
-		diamondRed: [2, 5, 2, 1],
+    	breakableDeath: [0, 0, 2, 1],
+        solidGray: [0, 1, 2, 1],
+        breakableBlue: [0, 2, 2, 1],
+		breakableGreen: [0, 3, 2, 1],
+		breakablePurple: [0, 4, 2, 1],
+		breakableRed: [0, 5, 2, 1],
+		breakableDiamond: [2, 0, 2, 1],
+		breakableLightblue: [2, 1, 2, 1],
+		solidBlue: [2, 2, 2, 1],
+		solidGreen: [2, 3, 2, 1],
+		solidPurple: [2, 4, 2, 1],
+		solidRed: [2, 5, 2, 1],
 		playerGray: [4, 0],
 		playerLightblue: [4, 1],
 		playerBlue: [4, 2],
@@ -34,34 +34,35 @@ window.onload = function () {
 	function setTileParams(tile) {
 		switch(tile) {
 			case 'a':
-				return ["diamond", "Gray"];
+				return ["solid", "Gray"];
 			case 'x':
-				return ["brick", "Death"];
+				return ["breakable", "Death"];
 			case '*':
-				return ["brick", "Diamond"];
+				return ["breakable", "Diamond"];
 			case 'l':
-				return ["brick", "Lightblue"]
+				return ["breakable", "Lightblue"]
 			case 'b':
-				return ["brick", "Blue"];
+				return ["breakable", "Blue"];
 			case 'B':
-				return ["diamond", "Blue"];
+				return ["solid", "Blue"];
 			case 'g':
-				return ["brick", "Green"];
+				return ["breakable", "Green"];
 			case 'G':
-				return ["diamond", "Green"];
+				return ["solid", "Green"];
 			case 'p':
-				return ["brick", "Purple"];
+				return ["breakable", "Purple"];
 			case 'P':
-				return ["diamond", "Purple"];
+				return ["solid", "Purple"];
 			case 'r':
-				return ["brick", "Red"];
+				return ["breakable", "Red"];
 			case 'R':
-				return ["diamond", "Red"];
+				return ["solid", "Red"];
 			default:
-				return ["diamond", "Gray"];
+				return ["solid", "Gray"];
 		}
 	}
 
+	// Custom component to set colors of bricks and player to allow for player color-change and brick removal features
 	Crafty.c("Color", {
 		_color: '',
 
@@ -86,42 +87,38 @@ window.onload = function () {
 		}
 	});
 
-
-    //method to generate the map
-		// Map is 10 (64px) tiles horizontally and 16 (32px) tiles vertically
+	// Generate the level layout
     function generateWorld() {
-    	/*
-		 * @todo Crafty.background
-		 */
 
+    	/*
+    	 * @ TODO set background image
+    	 */
+    	// Background color
 		Crafty.background("#222");
 
-		if (window.XMLHttpRequest)
-		{// code for IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp=new XMLHttpRequest();
+		// Retrieve level info via xml request
+		if (window.XMLHttpRequest) {
+			xmlhttp=new XMLHttpRequest(); // Modern browsers
 		}
-		else
-		{// code for IE6, IE5
-			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		else {
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
 		}
 		xmlhttp.open("GET","levels.xml",false);
 		xmlhttp.send();
 		xmlDoc=xmlhttp.responseXML;
 
-		//alert(xmlDoc.getElementById("level2").childNodes[3].childNodes[0].nodeValue);
-
+		// Retrieve level layout and split into parseable array
 		var level_lines = xmlDoc.getElementById("level2").childNodes[3].childNodes[0].nodeValue.split('\n');
-		//alert(level_lines[0]);
-		level_lines.shift(); // Remove the first list element to allow for easier XML level layout formatting.
+		level_lines.shift(); // Remove the first list element to allow for easier XML level layout formatting
 
 		// Loop through the level layout rows
 		for (var row=0;row<level_lines.length-1;row++) {
 			for (var tile=0;tile<12;tile++) {
 				if (level_lines[row][tile] != ' ') {
-					var tileParams = setTileParams(level_lines[row][tile]); // setTileParams returns tile type,color in an array.
+					var tileParams = setTileParams(level_lines[row][tile]); // setTileParams returns tile type,color in an array
 					var tileType = tileParams[0];
 					var tileColor = tileParams[1];
-					if (tileType == 'brick') {
+					if (tileType == 'breakable') {
 						Crafty.e("2D, DOM, Collision, Color, " + tileType + ", " + tileColor)
 							.attr({ w: 64, h: 32, x: tile * 64, y: row * 32, z:1 })
 							.setcolor(tileType, tileColor) // Tile type, color
@@ -141,132 +138,149 @@ window.onload = function () {
 		}
     }
 
-    //the loading screen that will display while our assets load
+    // The loading screen that will display while our assets load
     Crafty.scene("loading", function () {
-        //load takes an array of assets and a callback when complete
+    	/*
+    	 * @ TODO plug in background images to load function
+    	 */
+        // Load takes an array of assets and a callback when complete
         Crafty.load(["sprite.png"], function () {
-            Crafty.scene("main"); //when everything is loaded, run the main scene
+            Crafty.scene("main"); // When everything is loaded, run the main scene
         });
 
-        //black background with some loading text
+        // Black background with some loading text
         Crafty.background("#000");
         Crafty.e("2D, DOM, Text").attr({ w: 100, h: 20, x: 150, y: 120 })
                 .text("Loading")
                 .css({ "text-align": "center" });
     });
 
-    //automatically play the loading scene
+    // Automatically play the loading scene
     Crafty.scene("loading");
 
+    // Main game scene
+	Crafty.scene("main", function() {
+		generateWorld();
 		
-		Crafty.scene("main", function() {
-			generateWorld();
+		var naturalDir = 1;
+		
+		// NaturalWay sets the vertical movement of the player and sets boundaries
+		Crafty.c("NaturalWay", {
+			_vspeed: 3,
+			_up: false,
 			
-			var naturalDir = 1;
+			init: function() {
+				this.requires("Keyboard");
+			},
 			
-			// NaturalWay sets the vertical movement of the player and sets boundaries
-			Crafty.c("NaturalWay", {
-				_vspeed: 3,
-				_up: false,
+			naturalway: function(vspeed) {
+				if(vspeed) this._vspeed = vspeed;
 				
-				init: function() {
-					this.requires("Keyboard");
-				},
-				
-				naturalway: function(vspeed) {
-					if(vspeed) this._vspeed = vspeed;
-					
-					this.bind("EnterFrame", function() {
-						if (this.disableControls) return;
-						// Down is -1
-						if(this.y < (MAX_HEIGHT - 32) && naturalDir == -1) {
-							this.y += this._vspeed;
-						} else if (this.y >= (MAX_HEIGHT - 32)) {
-							naturalDir = -naturalDir;
-						}
-						// Up is 1
-						if(this.y > 2 && naturalDir == 1) {
-							this.y -= this._vspeed;
-						} else if (this.y <= 2) {
-							naturalDir = -naturalDir;
-						}
-					});
-					
-					return this;
-				}
-					
-			});
-			
-			// Custom Twoway component to allow only left and right movement and eliminate jumping
-			Crafty.c("OnlyTwoway", {
-				_hspeed: 3,
-				
-				init: function() {
-					this.requires("Keyboard");
-				},
-				
-				onlytwoway: function(hspeed) {
-					if(hspeed) this._hspeed = hspeed;
-					
-					this.bind("EnterFrame", function() {
-						if((this.isDown("RIGHT_ARROW") || this.isDown("D")) && this.x < (MAX_WIDTH - 32)) {
-							this.x += this._hspeed;
-						}
-						if((this.isDown("LEFT_ARROW") || this.isDown("A")) && this.x >= 2) {
-							this.x -= this._hspeed;
-						}						
-					});
-					
-					return this;
-				}
-			});
-
-			function reverseDirection() {
-				naturalDir = -naturalDir;
-			}
-
-			// Create our player entity with some premade components
-			var player = Crafty.e("2D, DOM, player, Color, OnlyTwoway, NaturalWay, Collision, WiredHitBox")
-				.attr({x: 18, y: 280, z: 1})
-				.setcolor('player','Lightblue') // Color specified must be capitalized
-				.onlytwoway(4)
-				.naturalway(3)
-				.collision(new Crafty.polygon([16,0],[4.686,4.686],[0,16],[4.686,27.314],[16,32],[27.314,27.314],[32,16],[27.314,4.686]))
-				.onHit("brick", function(data) { // When a collision occurs with a brick...
-					if (data[0]['normal']['y']==0) {
-						reverseDirection();
+				// On every frame, reverses player vertical direction if the player entity is at the edge of the playing field
+				this.bind("EnterFrame", function() {
+					if (this.disableControls) return;
+					// Down is -1
+					if(this.y < (MAX_HEIGHT - 32) && naturalDir == -1) {
+						this.y += this._vspeed;
+					} else if (this.y >= (MAX_HEIGHT - 32)) {
+						naturalDir = -naturalDir;
 					}
-					else {
-						this._hspeed = 0;
+					// Up is 1
+					if(this.y > 2 && naturalDir == 1) {
+						this.y -= this._vspeed;
+					} else if (this.y <= 2) {
+						naturalDir = -naturalDir;
 					}
-				}, function() {
-					this._hspeed = 3;
-				})
-				.onHit("diamond", function(data) { // When a collision occurs with a diamond...
-					if (data[0]['normal']['y']==0) {
-						reverseDirection();
-					}
-					else {
-						this._hspeed = 0;
-					}
-				}, function() {
-					this._hspeed = 3;
-				})
-				.onHit("diamondBlue", function() { // When a collision occurs with a blue diamond...
-					this.removecolor('player',this.getcolor());
-					this.setcolor('player','Blue'); // set the new player color and add the correct attribute
-				})
-				.onHit("diamondGreen", function() { // When a collision occurs with a blue diamond...
-					this.removecolor('player',this.getcolor());
-					this.setcolor('player','Green'); // set the new player color and add the correct attribute
-				})
-				.onHit("diamondPurple", function() { // When a collision occurs with a blue diamond...
-					this.removecolor('player',this.getcolor());
-					this.setcolor('player','Purple'); // set the new player color and add the correct attribute
-				})
-				.onHit("diamondRed", function() { // When a collision occurs with a blue diamond...
-					this.removecolor('player',this.getcolor());
-					this.setcolor('player','Red'); // set the new player color and add the correct attribute
 				});
+				
+				return this;
+			}
+				
 		});
+		
+		// Custom Twoway component to allow only left and right movement and eliminate jumping
+		Crafty.c("OnlyTwoway", {
+			_hspeed: 3,
+			
+			init: function() {
+				this.requires("Keyboard");
+			},
+			
+			onlytwoway: function(hspeed) {
+				if(hspeed) this._hspeed = hspeed;
+				
+				// Checks for movement input on every frame and allows within playing field boundaries
+				this.bind("EnterFrame", function() {
+					if((this.isDown("RIGHT_ARROW") || this.isDown("D")) && this.x < (MAX_WIDTH - 32)) {
+						this.x += this._hspeed;
+					}
+					if((this.isDown("LEFT_ARROW") || this.isDown("A")) && this.x >= 2) {
+						this.x -= this._hspeed;
+					}						
+				});
+				
+				return this;
+			}
+		});
+
+		// Function to reverse player direction on contact with a solid or breakable brick
+		function reverseDirection() {
+			naturalDir = -naturalDir;
+		}
+
+		// Create our player entity with some premade components
+		var player = Crafty.e("2D, DOM, player, Color, OnlyTwoway, NaturalWay, Collision")
+			.attr({x: 18, y: 280, z: 1})
+			.setcolor('player','Lightblue') // Color specified must be capitalized
+			.onlytwoway(4)
+			.naturalway(3)
+			.collision(new Crafty.polygon([16,0],[4.686,4.686],[0,16],[4.686,27.314],[16,32],[27.314,27.314],[32,16],[27.314,4.686])) // This is a weak octogon meant to represent a circle
+			.onHit("breakable", function(data) { // When a collision occurs with a breakable...
+				// Check if the hitdata returns a y value that isn't 0. If it is 0, it's a top or bottom, so reverse player direction
+				if (data[0]['normal']['y']==0) {
+					reverseDirection();
+				}
+				// If y does not equal 0, it's a side, so restrict player left-right movement and maintain direction
+				else {
+					this._hspeed = 0;
+				}
+			}, function() {
+				this._hspeed = 3;
+			})
+			.onHit("solid", function(data) { // When a collision occurs with a solid...
+				// Check if the hitdata returns a y value that isn't 0. If it is 0, it's a top or bottom, so reverse player direction
+				if (data[0]['normal']['y']==0) {
+					reverseDirection();
+				}
+				// If y does not equal 0, it's a side, so restrict player left-right movement and maintain direction
+				else {
+					this._hspeed = 0;
+				}
+			}, function() {
+				/*
+				 * @ TODO make hspeed reset a variable, so it can change depending on the level
+				 */
+				// Reset horizontal speed, allowing the player to move again
+				this._hspeed = 3;
+			})
+			/*
+			 * @ TODO can this be refactored to not be checking 4+ events every frame?
+			 */
+			.onHit("solidBlue", function() { // When a collision occurs with a blue solid...
+				this.removecolor('player',this.getcolor());
+				this.setcolor('player','Blue'); // set the new player color and add the correct attribute
+			})
+			.onHit("solidGreen", function() { // When a collision occurs with a green solid...
+				this.removecolor('player',this.getcolor());
+				this.setcolor('player','Green');
+			})
+			.onHit("solidPurple", function() { // When a collision occurs with a purple solid...
+				this.removecolor('player',this.getcolor());
+				this.setcolor('player','Purple');
+			})
+			.onHit("solidRed", function() { // When a collision occurs with a red solid...
+				this.removecolor('player',this.getcolor());
+				this.setcolor('player','Red');
+			});
+	});
 };

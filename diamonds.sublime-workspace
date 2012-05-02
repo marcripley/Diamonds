@@ -79,7 +79,7 @@
 			"file": "game.js",
 			"settings":
 			{
-				"buffer_size": 7866,
+				"buffer_size": 7909,
 				"line_ending": "Windows"
 			}
 		},
@@ -220,15 +220,15 @@
 					"file": "game.js",
 					"settings":
 					{
-						"buffer_size": 7866,
+						"buffer_size": 7909,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6486,
-								6486
+								375,
+								375
 							]
 						],
 						"settings":
@@ -237,7 +237,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3465.0,
+						"translation.y": 86.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
